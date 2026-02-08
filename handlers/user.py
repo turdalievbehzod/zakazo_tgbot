@@ -13,7 +13,7 @@ async def menu(message: Message):
     menu = show_today_menu()
 
     if not menu:
-        await message.answer("Menu is empty")
+        await message.answer("😔 Menu is empty for today ")
         return
 
     for m in menu:

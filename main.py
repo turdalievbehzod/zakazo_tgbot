@@ -1,7 +1,8 @@
 import asyncio
 from aiogram import Bot, Dispatcher
-
-from config import BOT_TOKEN
+from core.db_settings import execute_query
+from core.models import *
+from core.config import BOT_TOKEN
 from handlers import start, user, admin
 
 bot = Bot(BOT_TOKEN)
@@ -17,4 +18,10 @@ async def main():
 
 
 if __name__ == "__main__":
+    execute_query(users)
+    execute_query(products)
+    execute_query(menu_products)
+    execute_query(durations)
+    execute_query(orders)
+
     asyncio.run(main())

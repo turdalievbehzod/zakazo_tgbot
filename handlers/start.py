@@ -1,6 +1,8 @@
 from aiogram import Router, F
 from aiogram.types import Message, KeyboardButton, ReplyKeyboardMarkup
 from aiogram.fsm.context import FSMContext
+from aiogram.types import ReplyKeyboardRemove
+
 
 from core.config import DEVELOPER_ID
 from core.db_settings import execute_query
@@ -38,6 +40,9 @@ async def get_name(message: Message, state: FSMContext):
     await state.set_state(RegisterState.phone)
 
 
+
+from aiogram.types import ReplyKeyboardRemove
+
 @router.message(RegisterState.phone, F.contact)
 async def get_phone(message: Message, state: FSMContext):
     data = await state.get_data()
@@ -55,5 +60,9 @@ async def get_phone(message: Message, state: FSMContext):
         )
     )
 
-    await message.answer("Registration completed ✅", reply_markup=None)
+    await message.answer(
+        "Registration completed ✅",
+        reply_markup=ReplyKeyboardRemove()
+    )
+
     await state.clear()
